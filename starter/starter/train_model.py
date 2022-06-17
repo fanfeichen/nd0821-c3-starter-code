@@ -1,10 +1,13 @@
 # Script to train machine learning model.
 
+import pandas as pd
+from ml.data import clean_data, process_data
 from sklearn.model_selection import train_test_split
+from pathlib import Path
 
-# Add the necessary imports for the starter code.
-
-# Add code to load in the data.
+# Load and clean raw data
+cur_path = str(Path(__file__).parent.absolute())
+data = clean_data(cur_path + "/census.csv")
 
 # Optional enhancement, use K-fold cross validation instead of a train-test split.
 train, test = train_test_split(data, test_size=0.20)

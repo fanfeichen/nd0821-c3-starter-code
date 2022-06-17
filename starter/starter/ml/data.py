@@ -1,6 +1,24 @@
 import numpy as np
+import pandas as pd
 from sklearn.preprocessing import LabelBinarizer, OneHotEncoder
 
+
+def clean_data(data_path):
+    """Process the data cleaning 
+
+    Inputs
+    ------
+    data_path : str
+        Raw data path
+
+    Returns
+    -------
+    data_out : pd.DataFrame
+        Dataframe containing clean raw data
+    """
+
+    data = pd.read_csv(data_path, skipinitialspace = True)
+    return data
 
 def process_data(
     X, categorical_features=[], label=None, training=True, encoder=None, lb=None
