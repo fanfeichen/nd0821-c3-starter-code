@@ -17,7 +17,7 @@ def clean_data(data_path):
         Dataframe containing clean raw data
     """
 
-    data = pd.read_csv(data_path, skipinitialspace = True)
+    data = pd.read_csv(data_path, skipinitialspace = True).replace('?', np.nan).dropna()
     return data
 
 def process_data(

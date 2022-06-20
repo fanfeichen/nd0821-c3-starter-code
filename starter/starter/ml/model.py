@@ -1,3 +1,5 @@
+from sklearn.ensemble import RandomForestClassifier
+from .data import process_data
 from sklearn.metrics import fbeta_score, precision_score, recall_score
 
 
@@ -18,7 +20,10 @@ def train_model(X_train, y_train):
         Trained machine learning model.
     """
 
-    pass
+    clf = RandomForestClassifier(max_depth=10, random_state=0)
+    clf.fit(X_train, y_train)
+
+    return clf
 
 
 def compute_model_metrics(y, preds):
@@ -57,4 +62,43 @@ def inference(model, X):
     preds : np.array
         Predictions from the model.
     """
-    pass
+    
+    y_pred = model.predict(X)
+
+    return y_pred
+
+
+def compute_slice_metric(model, cat_feat, cat_features, encoder, lb, X):
+    """ Output the performance of the model on slices of the data
+
+    Inputs
+    ------
+    model : ???
+        Trained machine learning model.
+    cat_feat: str
+        A given categorical variable
+    cat_features: list
+        All categorical variables
+    encoder : sklearn.preprocessing._encoders.OneHotEncoder
+        Trained sklearn OneHotEncoder, only used if training=False.
+    lb : sklearn.preprocessing._label.LabelBinarizer
+        Trained sklearn LabelBinarizer, only used if training=False.
+    X : np.array
+        Data used for prediction.
+    Returns
+    -------
+    performance : dict
+        F1 performance of the model on slices of the data.
+    """
+
+    output = {}
+    for feat in X[cat_feat].unique():
+        sample_data = X[X[cat_feat] == feat]
+        sample_X_test, sample_y_test, _, _ = process_data(
+            sample_data, categorical_features=cat_features, label="salary", training=False, encoder=encoder, lb=lb
+            )
+        sample_y_pred = inference(model, sample_X_test)
+        _, _, f1 = compute_model_metrics(sample_y_test, sample_y_pred)
+        print(f"For {feat} in {cat_feat}, the F1 of the model prediction is {f1}")
+        output[feat] = f1
+    return output
