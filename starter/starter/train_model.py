@@ -52,5 +52,5 @@ print(f"F1 on test data is: {f1}.")
 # Output the performance of the model on slices of the data
 performance = compute_slice_metric(clf, "workclass", cat_features, encoder, lb, data)
 list_of_strings = [ f'{key} : {performance[key]}' for key in performance ]
-with open(cur_path + 'slice_output.txt', 'w') as file:
+with open(cur_path + '/slice_output.txt', 'w') as file:
      [ file.write(f'{st}\n') for st in list_of_strings ]
