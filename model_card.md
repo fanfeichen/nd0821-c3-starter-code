@@ -28,7 +28,8 @@ Self-emp-inc : 0.786096256684492
 Without-pay : 1.0
 
 ## Ethical Considerations
-N/A
+- Any type of communication in relation to the research should be done with honesty and transparency.
+- Any type of misleading information, as well as representation of primary data findings in a biased way must be avoided.
 
 ## Caveats and Recommendations
-N/A
+Working in a command line environment is recommended for ease of use with Git and DVC. If on Windows, WSL1 or 2 is recommended. The requirements.txt file is for creating a conda project environment.
