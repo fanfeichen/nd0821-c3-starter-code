@@ -17,7 +17,7 @@ data_test = {
         "native-country": "United-States"
     }
 
-post_response = requests.post("http://127.0.0.1:5000/adult/", json=data_test)
+post_response = requests.post("https://project3-udacity.herokuapp.com/adult/", json=data_test)
 
 print(post_response.status_code)
 print(post_response.json())
