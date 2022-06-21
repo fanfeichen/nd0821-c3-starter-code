@@ -46,6 +46,12 @@ class Adult(BaseModel):
 
 app = FastAPI()
 
+global clf, encoder, lb
+cur_path = str(Path(__file__).parent.absolute())
+clf = pickle.load(open(cur_path + '/model/model.pkl', "rb"))
+encoder = pickle.load(open(cur_path + '/data/encoder.pkl', "rb"))
+lb = pickle.load(open(cur_path + '/data/lb.pkl', "rb"))
+
 @app.get("/")
 async def welcome(user: str = "User"):
     return {"greeting": f"Welcome {user}!"}
@@ -80,18 +86,6 @@ async def inference_adult(person: Adult):
         "native-country": [person.native_country]
             }
     raw_input = pd.DataFrame(data)
-
-    cur_path = str(Path(__file__).parent.absolute())
-
-    # Load data parameters
-    with open(cur_path + '/data/encoder.pkl','rb') as f:
-        encoder = pickle.load(f)
-    with open(cur_path + '/data/lb.pkl','rb') as f:
-        lb = pickle.load(f)
-
-    # Load model
-    with open(cur_path + '/model/model.pkl','rb') as f:
-        clf = pickle.load(f)
 
     # Process the raw input data
     input, _, _, _ = process_data(
