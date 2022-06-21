@@ -19,12 +19,12 @@ The model is evaludated on slices of the data. We iterate through the distinct v
 ## Metrics
 F1 score is used for evaluating the model performance. The F1 score on testing data is 0.65.
 The metrics on slices of the data is in file slice_output.txt. They are as follows:
-State-gov : 0.7592592592592593
-Self-emp-not-inc : 0.6570281124497992
-Private : 0.6519845713574717
-Federal-gov : 0.6531986531986532
-Local-gov : 0.6848319709355133
-Self-emp-inc : 0.786096256684492
+State-gov : 0.7593
+Self-emp-not-inc : 0.657
+Private : 0.653
+Federal-gov : 0.6533
+Local-gov : 0.6848
+Self-emp-inc : 0.7861
 Without-pay : 1.0
 
 ## Ethical Considerations
